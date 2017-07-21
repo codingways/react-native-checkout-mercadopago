@@ -20,7 +20,7 @@ RCT_EXPORT_METHOD(startCheckout:(NSString *)publicKey:(NSString *)prefId:(RCTPro
     
     UINavigationController *checkoutFlow = [MPFlowBuilder startCheckoutViewController:prefId callback:^(Payment *payment) {
         NSDictionary *dictionary = @{@"id": payment._id, @"status": payment.status};
-        @synchronized(dictionary) {
+        @synchronized(prefId) {
             resolve(dictionary);
         }
     } callbackCancel:nil];
